@@ -4,7 +4,8 @@ var count = 0;
 var buttonColors = ["red", "blue", "green", "yellow"];
 var level = 0;
 var count2 = 0;
-
+var highscore = 0;
+var newRecord = false;
 function nextSequence() {
     var randomNumber = Math.floor(Math.random() * 4);
     var randomChosenColor = buttonColors[randomNumber];
@@ -48,6 +49,7 @@ $(document).on("keydown", function () {
         setTimeout(function () {
             $("h1").text("Level 0");
             nextSequence();
+            $("#score").text("Highscore: " + highscore);
         }, 400);
     }
 })
@@ -65,6 +67,7 @@ function checkAnswer() {
         setTimeout(nextSequence, 900);
         userClickedPattern = [];
         count2 = 0;
+        checkHighScore();
     };
 }
 
@@ -85,4 +88,16 @@ function handleGameOver(cool) {
         var sound = new Audio("./sounds/wrong.mp3");
         sound.play();
         startOver();
+        if (newRecord == true) {
+            $("#score").text("New Highscore of " + highscore + "!");
+        }
+        newRecord = false;
+}
+
+function checkHighScore() {
+    if (highscore < level) {
+        highscore = level;
+        newRecord = true;
+    }
+    $("#score").text("Highscore: " + highscore);
 }
