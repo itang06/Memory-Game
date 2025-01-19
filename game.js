@@ -33,6 +33,7 @@ $(".btn").on("click", function () {
 
 function playSound(ohio) {
     var sound = new Audio("./sounds/" + ohio + ".mp3");
+    sound.volume = 0.15;
     sound.play();
 }
 
@@ -86,6 +87,7 @@ function handleGameOver(cool) {
 
         $("h1").text(cool + " Press Any Key to Restart");
         var sound = new Audio("./sounds/wrong.mp3");
+        sound.volume = 0.2;
         sound.play();
         startOver();
         if (newRecord == true) {
